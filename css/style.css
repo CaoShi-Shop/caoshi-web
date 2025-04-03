@@ -1,0 +1,402 @@
+
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+    background-color: #0e0e0e;
+    color: #e8e8e8;
+    line-height: 1.6;
+  }
+  
+  .hero-banner {
+    width: 100%;
+    overflow: hidden;
+    background-color: #000;
+  }
+  
+  .hero-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem auto 0;
+    flex-wrap: wrap;
+  }
+  
+  .tab-button {
+    padding: 0.6rem 1.2rem;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .tab-button.active,
+  .tab-button:hover {
+    background-color: #fff;
+    color: #111;
+  }
+  
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  
+  .product-grid.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .product-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .product-card:hover {
+    transform: translateY(-4px);
+  }
+  
+  .title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0.6rem 0 0.4rem;
+    line-height: 1.4;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .sales-info {
+    font-size: 0.85rem;
+    color: #aaa;
+    margin-top: 0.3rem;
+  }
+  
+  .badge-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.65);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    animation: bounce 1.5s infinite;
+    line-height: 1;
+  }
+  
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  
+  .modal.show {
+    display: flex;
+  }
+  
+  .modal-content {
+    background: #111;
+    max-width: 600px;
+    width: 90%;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    color: #eee;
+    overflow-y: auto;
+    max-height: 80vh;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+    background: #fff;
+    color: #111;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  /* ✅ 卡片封面轮播图 */
+  .card-carousel {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: 0.6rem;
+  }
+  
+  .card-carousel img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  .card-carousel img.active {
+    opacity: 1;
+    z-index: 1;
+  }
+  
+  /* ✅ 弹窗轮播图（不闪） */
+  .carousel {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+  
+  .carousel-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    user-select: none;
+  }
+  
+  .carousel-img.active {
+    opacity: 1;
+    z-index: 1;
+    position: relative;
+  }
+  
+  .carousel .prev,
+  .carousel .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    z-index: 2;
+  }
+  
+  .carousel .prev {
+    left: 10px;
+  }
+  
+  .carousel .next {
+    right: 10px;
+  }
+  
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  
+  .dot {
+    width: 8px;
+    height: 8px;
+    background: #888;
+    border-radius: 50%;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .dot.active {
+    background: #fff;
+    opacity: 1;
+  }
+  
+  .wechat-section {
+    text-align: center;
+    padding: 3rem 1rem;
+    background-color: #0e0e0e;
+    border-top: 1px solid #222;
+  }
+  
+  .wechat-section h2 {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #e8e8e8;
+    margin-bottom: 1.5rem;
+  }
+  
+  .wechat-qr {
+    max-width: 180px;
+    width: 100%;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .copy-success {
+    color: #28a745;
+    font-size: 0.9rem;
+    display: none;
+    margin-top: 0.5rem;
+  }
+  
+  .site-footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.9rem;
+    color: #999;
+    background-color: #0e0e0e;
+    border-top: 1px solid #222;
+  }
+  
+  .btn,
+  #copyBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #00c853, #00e676);
+    color: white;
+    padding: 0.6rem 1.4rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: all 0.25s ease;
+  }
+  
+  .btn:hover,
+  #copyBtn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #00b248, #00d563);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  }
+  
+  .floating-menu {
+    position: fixed;
+    right: 20px;
+    bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 1000;
+  }
+  
+  .float-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 1.4rem;
+    line-height: 1;
+    font-family: "Font Awesome 6 Free", Arial, sans-serif;
+    font-weight: 900;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
+    transition: background 0.3s, transform 0.2s;
+  }
+  
+  .float-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem auto;
+    color: #fff;
+    font-size: 1rem;
+  }
+  
+  .pagination button {
+    padding: 0.5rem 1rem;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .pagination button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+  
+  .modal.fade-in {
+    animation: fadeIn 0.3s forwards;
+  }
+  
+  .modal.fade-out {
+    animation: fadeOut 0.3s forwards;
+  }
+  
